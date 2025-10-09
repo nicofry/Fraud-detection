@@ -20,16 +20,18 @@ The data is sourced from the public "Credit Card Fraud Detection" dataset:
 
 ## Methodology and Key Steps (In Progress)
 
-1.  **Data Preparation:** Applying the **RobustScaler** according to the `fit_transform` on the *Train* and `transform` on the *Test* rule to prevent any leakage.
-2.  **Rebalancing:** Utilizing **SMOTETomek** to address the class imbalance.
-3.  **Optimization:** Searching for optimal hyperparameters for **XGBoost** via **Optuna**.
-4.  **Rigour Ensured:** The rebalancing step is integrated directly into an **`imblearn` Pipeline** passed to the CV, guaranteeing that the resampling does not contaminate the validation folds.
-5.  **Evaluation:** Final performance measurement (Recall, ROC AUC) on a pure hold-out test set.
+1. **Splitting:** Split the data using timeseriesplit to ensure good parctice and avoid bias on our model
+2. **Optimization:** Searching for optimal hyperparameters for **XGBoost** via **Optuna**.
+    a. Timsplitting inside pipeline
+    b. A scaling step is integrated directly into an **`imblearn` Pipeline** passed to the CV, guaranteeing that the scaling does not contaminate the validation folds.
+3. **Param determination** obtention of the best hyperparameters  for our model using the ROC AUC as metric
+4. **Data Preparation:** Applying the **RobustScaler** according to the `fit_transform` on the global *Train* and `transform` on the *Test* rule to prevent any leakage.
+5. **Evaluation:** Final performance measurement (Recall, ROC AUC) on a pure hold-out test set.
 
 ***
 
 ## Current Status
 
 * [✅] Exploratory Data Analysis (EDA) and Initial Preparation complete.
-* [🛠] **In Progress:** Hyperparameter Optimization (XGBoost + SMOTETomek Pipeline) via Optuna.
+* [🛠] **In Progress:** Hyperparameter Optimization (XGBoost Pipeline) via Optuna.
 * [⬜️] Final Training and Evaluation on the Test Set.
